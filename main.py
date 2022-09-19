@@ -17,5 +17,22 @@ for cl in myList:
     images.append(curImg)
     # basically removing the extension from the image it luks gud
     classNames.append(os.path.splitext(cl)[0])
-print(classNames)
+# print(classNames)
+# start our encoding process
+
+def enc(images):
+    encodeList = []
+    for img in images:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        encode = face_recognition.face_encodings(img)[0]
+        encodeList.append(encode)
+    return encodeList
+
+
+encodeListKnown = enc(images)
+print("Done with encoding")
+
+
+
+
 
