@@ -45,6 +45,9 @@ while True:
     # find encodings of the resized image sending in the small images and The location of
     # all the faces in current frame
     encodesCurrFrame = face_recognition.face_encodings(imgS, facesCurrFrame)
+# one by one it grabs faces from facesCurrFrame list and Encodings From encodesCurrFrame list
+    for enc, faceLoc in zip(encodesCurrFrame, facesCurrFrame):
+
 
 
 
