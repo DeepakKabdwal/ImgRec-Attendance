@@ -28,10 +28,23 @@ def enc(images):
         encodeList.append(encode)
     return encodeList
 
-
 encodeListKnown = enc(images)
 print("Done with encoding")
 
+# setting up the webcam to capture images
+cap = cv2.VideoCapture(0)
+# reading every frame
+while True:
+    success, img = cap.read()
+    #recising the image to 0.25 of original
+    imgS = cv2.resize(img, (0,0), None, 0.25, 0.25)
+    imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
+    # find location of all the faces from our webcam feed [0] is not there so that
+    # even if there are more than one faces in the feed
+    facesCurrFrame = face_recognition.face_locations(imgS)
+    # find encodings of the resized image sending in the small images and The location of
+    # all the faces in current frame
+    encodesCurrFrame = face_recognition.face_encodings(imgS, facesCurrFrame)
 
 
 
