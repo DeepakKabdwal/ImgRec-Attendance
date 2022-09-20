@@ -13,6 +13,7 @@ myList = os.listdir(path)
 # print(myList)
 # importing every image in the training directory
 for cl in myList:
+    # noinspection PyUnresolvedReferences
     curImg = cv2.imread(f'{path}/{cl}')
     images.append(curImg)
     # basically removing the extension from the image it luks gud
@@ -36,8 +37,8 @@ cap = cv2.VideoCapture(0)
 # reading every frame
 while True:
     success, img = cap.read()
-    #recising the image to 0.25 of original
-    imgS = cv2.resize(img, (0,0), None, 0.25, 0.25)
+    # resizing the image to 0.25 of original
+    imgS = cv2.resize(img, (0, 0), None, 0.25, 0.25)
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
     # find location of all the faces from our webcam feed [0] is not there so that
     # even if there are more than one faces in the feed
@@ -47,8 +48,26 @@ while True:
     encodesCurrFrame = face_recognition.face_encodings(imgS, facesCurrFrame)
 # one by one it grabs faces from facesCurrFrame list and Encodings From encodesCurrFrame list
     for enc, faceLoc in zip(encodesCurrFrame, facesCurrFrame):
+        matches = face_recognition.compare_faces(encodeListKnown, enc)
+        # this will return a list which will contain the distance or dis-similaritis the image from camera
+        # have and the images provided in the training data
+        # the lowest value will have our match
+        faceDis = face_recognition.face_distance(encodeListKnown, enc)
+       # print(faceDis)
+        matchIndex = np.argmin(faceDis)
+        if matches[matchIndex]:
+            name = classNames[matchIndex]
+            print(name)
+            y1, x2, y2, x1 = faceLoc
+            y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+            cv2.rectangle(img,(x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(img, (x1, y2-35), (x2, y2), (0, 255, 0), cv2.FILLED)
+            cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
 
 
+
+    cv2.imshow('Webcam', img)
+    cv2.waitKey(1)
 
 
 
