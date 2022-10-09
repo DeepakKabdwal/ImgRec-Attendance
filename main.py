@@ -2,6 +2,7 @@ import cv2
 import face_recognition
 import numpy as np
 import os
+from datetime import datetime
 
 path = 'imagesAttendance'
 # list to store images
@@ -30,6 +31,8 @@ def enc(images):
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
     return encodeList
+
+def markAttendance(name):
 
 
 encodeListKnown = enc(images)
@@ -60,7 +63,7 @@ while True:
         matchIndex = np.argmin(faceDis)
         if matches[matchIndex]:
             name = classNames[matchIndex]
-            print(name)
+           #print(name)
             y1, x2, y2, x1 = faceLoc
             y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
