@@ -12,6 +12,8 @@ The images folder should be on the same directory where the code is located othe
 
 Run the program once it generates encodings for training data it will start showing results on screen or in an CSV(comma seperated values) if you like. Or I'll branch out an update for that too.
 
+
+
 Softwares Used:-
 1. Pycharm Community Edition
 2. Python 3.9
