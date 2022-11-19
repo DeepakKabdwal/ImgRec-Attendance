@@ -16,7 +16,7 @@ Only the names are stored in the Att.csv file now.
 
 if you want to see the feed on the screen 
 
-\*\  # cv2.imshow('Webcam', img)
+\*\  # cv2.imshow('Webcam', img)                                                                                                                                                           
     # cv2.waitKey(1)
 /*/
 
