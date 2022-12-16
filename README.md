@@ -32,4 +32,4 @@ https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471
 
 {Machine Learning is fun article on medium}
 
-[![@dezcvr's Holopin board](https://holopin.me/dezcvr)](https://holopin.io/@dezcvr)
+
