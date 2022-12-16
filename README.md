@@ -28,8 +28,8 @@ Softwares Used:-
 3. Anaconda (for environment).
 
 References:-
-https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471
 
-{Machine Learning is fun article on medium}
+
+[Machine Learning is fun article on medium] (https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471)
 
 
