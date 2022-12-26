@@ -28,6 +28,7 @@ def enc(images):
     encodeList = []
     for img in images:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
     return encodeList
@@ -65,10 +66,11 @@ while True:
     facesCurrFrame = face_recognition.face_locations(imgS)
     # find encodings of the resized image sending in the small images and The location of
     # all the faces in current frame
+
     encodesCurrFrame = face_recognition.face_encodings(imgS, facesCurrFrame)
     # one by one it grabs faces from facesCurrFrame list and Encodings From encodesCurrFrame list
     for enc, faceLoc in zip(encodesCurrFrame, facesCurrFrame):
-        matches = face_recognition.compare_faces(encodeListKnown, enc)
+        matches = face_recognition.compare_faces(encodeListKnown, enc, tolerance=0.5)
         # this will return a list which will contain the distance or dis-similarities the image from camera
         # have and the images provided in the training data
         # the lowest value will have our match
@@ -85,5 +87,5 @@ while True:
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
             markAttendance(name)
 
-    # cv2.imshow('Webcam', img)
-    # cv2.waitKey(1)
+    cv2.imshow('Webcam', img)
+    cv2.waitKey(1)
