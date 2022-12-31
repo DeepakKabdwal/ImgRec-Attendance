@@ -28,7 +28,6 @@ def enc(images):
     encodeList = []
     for img in images:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
         encode = face_recognition.face_encodings(img)[0]
         encodeList.append(encode)
     return encodeList
@@ -70,13 +69,15 @@ while True:
     encodesCurrFrame = face_recognition.face_encodings(imgS, facesCurrFrame)
     # one by one it grabs faces from facesCurrFrame list and Encodings From encodesCurrFrame list
     for enc, faceLoc in zip(encodesCurrFrame, facesCurrFrame):
-        matches = face_recognition.compare_faces(encodeListKnown, enc, tolerance=0.5)
+        matches = face_recognition.compare_faces(encodeListKnown, enc)
         # this will return a list which will contain the distance or dis-similarities the image from camera
         # have and the images provided in the training data
         # the lowest value will have our match
         faceDis = face_recognition.face_distance(encodeListKnown, enc)
-        # print(faceDis)
+        print(faceDis)
         matchIndex = np.argmin(faceDis)
+
+
         if matches[matchIndex]:
             name = classNames[matchIndex].upper()
            #print(name)
